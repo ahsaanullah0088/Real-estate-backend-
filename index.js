@@ -25,9 +25,13 @@ const app = express(); // ✅ Initialization before usage
 
 // CORS setup
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173', // Local dev
+    'https://real-estate-frontend-phi-six.vercel.app' // Vercel production
+  ],
   credentials: true
 }));
+
 
 // Middleware to parse JSON
 app.use(express.json());
