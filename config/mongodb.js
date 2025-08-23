@@ -1,10 +1,13 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const ConnectDb = async ()=>{
-  mongoose.connection.on("connected", ()=>{
-    console.log('databse connected')
-  });
+const ConnectDb = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("✅ MongoDB Connected...");
+  } catch (error) {
+    console.error("❌ MongoDB Connection Error:", error.message);
+    process.exit(1);
+  }
+};
 
-  await mongoose.connect(`${process.env.MONGO_URI}/gharbazaar?retryWrites=true&w=majority`);
-}
 export default ConnectDb;
